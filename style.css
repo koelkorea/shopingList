@@ -1,0 +1,160 @@
+:root {
+  /* color */
+  --color-black: #3f454d;
+  --color-white: #ffffff;
+  --color-blue: #3b88c3;
+  --color-yellow: #fbbe28;
+  --color-pink: #fd7f84;
+  --color-light-grey: #dfdfdf;
+
+  /* Font Size */
+  --font-large: 20px;
+
+  /* padding size */
+  --padding-large: 10px;
+  --padding-small: 5px;
+
+  /* margin size */
+  --margin-large: 20px;
+  --margin-small: 10px;
+
+  /* border Style */
+  --border-radius: 10px;
+
+  /* button size*/
+  --button-size: 60px;
+  --border-size: 4px;
+
+  /* annimation */
+  --size-animation-duration: 300ms;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* 모든 body 내 요소 */
+.all {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+body {
+  /* width : 100vw; */
+  height: 100vh;  /* 내부에 스크롤바 적용할 떄, body태그의 높이를 모니터 높이에 한정해야, 스크롤바가 overflow : scroll시 적용*/
+  background-color: var(--color-black);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+}
+
+button{
+  /* background-color: var(--color-black); */
+  background-color: transparent;  /* 버튼 색을 투명하게 유지하고 싶으면 이 녀석 사용 */
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* logo */
+.logo {
+  text-align: center;
+  padding-top: var(--margin-large);
+  cursor: pointer;
+  transition: transform var(--size-animation-duration) ease;
+}
+
+.logo:hover,
+.filter .action:hover {
+  transform: scale(1.1);
+}
+
+/* filter 
+    - 해당 파트의 미스터리 : 모범답안에서 이미지 버튼과 일반버튼의 높이는 어찌 맞췄으며, 반응형으로 제작했는가?
+        1. 이미지 너비 높이는 절대길이 줌 60px * 60px으로 맞춤 = 반응형 X 
+        2. 일반 버튼 높이는 따로 padding 값을 줌 = html요소 너비, 높이 + paddding값이  60px * 60px이 되게 제작...
+            -> (중요) 하지만 CSS 사용자 지정 변수를 통해 기입한 절대값이니, 추후 media쿼리를 통해 반응형 작성시 이러한 변수를 더 선언해서 바꿔끼면 해결된다 답변
+    
+    - 나의 구현 : 절대높이 안쓰고 상대높이로 대충 반응형으로 크기 조절되기 쉽게 상대단위를 사용.. 
+        -> (중요) 단! 앞으로는 이처럼 상대단위값을 쓰기 이전에, 기반이 되는 부모 태그의 길이를 CSS변수를 통해 절대단위값을 기입하여 상대단위를 쓰고자 하는 자식 태그의 너비, 높이 계산의 기준을 확실하게 정해두는 방향으로 코딩을 하자.. 
+        -> (중요) 너무 flexbox에 의존해서 cssom트리에 중첩적인 적용을 하지 말자.. */
+.filter {
+  margin: var(--padding-large) 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter .action {
+  /* flex: 1 1 0; */
+  text-align: center;
+  margin: 0 var(--margin-small);
+  font-size: var(--font-large);
+  width: 100%;
+  height: 100%;
+  transition: transform var(--size-animation-duration) ease;
+  border-radius: var(--border-radius);
+}
+
+.filter .action img {
+  width: 100%;
+  height: 100%;
+}
+
+.filter .action.blue{
+  background-color: var(--color-blue);
+}
+
+.filter .action.yellow{
+  background-color: var(--color-yellow);
+}
+
+.filter .action.pink{
+  background-color: var(--color-pink);
+}
+
+/* items */
+.items {
+  margin: var(--padding-large) 0;
+  overflow-y: scroll;
+  height: 60%;
+}
+
+.items::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.items::-webkit-scrollbar-thumb {
+  background-color: rgba(252, 240, 242, 0.5); /* 스크롤바 색상 */
+  border-radius: var(--border-radius); /* 스크롤바 둥근 테두리 */
+}
+
+.items::-webkit-scrollbar-track {
+  background: var(--color-black);  /*스크롤바 뒷 배경 색상*/
+}
+
+.items .container li{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  margin: var(--padding-large) 0;
+  height: var(--button-size);
+}
+
+.items .container li img {
+  height: 100%;
+  padding: var(--padding-small) var(--padding-large);
+  margin: 0 var(--margin-large);
+}
+
